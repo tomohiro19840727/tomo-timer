@@ -15,7 +15,7 @@ function Timer() {
   return (
     <>
     <div>{time}</div>
-  <button onClick={}>stop</button>
+  <button onClick={handleStop}>stop</button>
     </>
   )
 }
