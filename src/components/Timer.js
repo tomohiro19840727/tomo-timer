@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import "./Timer.css"
 
 function Timer() {
-  const [time, setTime] = useState(20);
+  const [time, setTime] = useState(10);
+
 
   let timerId;
  
@@ -14,11 +15,13 @@ function Timer() {
      if(time === 0) {
       clearInterval(timerId);
      }
+
    }
 
   useEffect(() => {
-
-    count();
+  
+     count();
+       
 
     return () => {  
 
@@ -26,11 +29,16 @@ function Timer() {
     }
   },[time])
   
-  
+   const handleStop = () => {
+    clearInterval(timerId)
+ 
+   }
+
   return (
     <>
-    <div className='time'>{time}</div>
-    <button className='time' onClick={() => clearInterval(timerId)}>stop</button>
+    <div className='time'>残り{time}秒</div>
+    <button className='start' onClick={() => count()}>start</button>
+    <button className='stop' onClick={() => handleStop()}>stop</button>
     </>
   )
 }

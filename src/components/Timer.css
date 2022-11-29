@@ -1,4 +1,16 @@
 .time {
+  font-size: 108px;
+  text-align: center;
+}
+
+.start {
   font-size: 32px;
   text-align: center;
+  color: blue
+}
+
+.stop {
+  font-size: 32px;
+  text-align: center;
+  color: red;
 }
