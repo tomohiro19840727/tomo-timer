@@ -31,6 +31,7 @@ function Timer() {
       setIsSet((set) => set + 1 )
      }
    }
+   gjlkfdsjkjg
 
   useEffect(() => {
      count();
