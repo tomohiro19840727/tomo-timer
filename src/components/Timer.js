@@ -4,7 +4,10 @@ import "./Timer.css"
 function Timer() {
   const [time, setTime] = useState(5);
   const [isSet, setIsSet] = useState(0);
-  const [issetTime, setIssetTime ] = useState(10)
+  const [issetTime, setIssetTime ] = useState(10);
+  const [isWorkCount, setIsWorkCount] = useState(false);
+  const [isWorkHocount, setIsWorkHocount] = useState(false);
+
 
 
   let timerId;
@@ -14,10 +17,10 @@ function Timer() {
      timerId = setInterval(() => {
       setTime((prevtime) => prevtime - 1)
      }, 1000)
+     setIsWorkCount(!isWorkCount);
 
      if(time === 0) {
       clearInterval(timerId);
-      hocount();
     }
   }
 
@@ -25,6 +28,7 @@ function Timer() {
     tomotimerId = setInterval(() => {
       setIssetTime((tomo) => tomo - 1)
     }, 1000)
+    setIsWorkHocount(!isWorkHocount);
     
     if(issetTime === 0) {
       clearInterval(tomotimerId);
@@ -32,13 +36,37 @@ function Timer() {
      }
    }
 
-  useEffect(() => {
-     count();
-    return () => {    
-      clearInterval(timerId);
-      clearInterval(tomotimerId);
-    }
-  },[time, issetTime])
+   useEffect(() => {
+      count();
+     return () => {    
+       clearInterval(timerId);
+     }
+   },[time, issetTime])
+   
+   useEffect(() => {
+    if(time === 0)
+      hocount();
+     return () => {    
+       clearInterval(tomotimerId);
+     }
+   },[issetTime, time])
+
+   useEffect(() => {
+      count();
+     return () => {    
+       clearInterval(timerId);
+     }
+   },[time, issetTime])
+   
+   useEffect(() => {
+    if(time === 0)
+      hocount();
+     return () => {    
+       clearInterval(tomotimerId);
+     }
+   },[issetTime, time])
+   ffds
+
   
    const handleStop = () => {
     clearInterval(timerId);
