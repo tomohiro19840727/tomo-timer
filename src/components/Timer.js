@@ -1,58 +1,56 @@
 import React, { useEffect, useState } from 'react'
 import "./Timer.css"
 
-function Timer() {
-  const [time, setTime] = useState(5);
-  const [isSet, setIsSet] = useState(0);
-  const [issetTime, setIssetTime ] = useState(10)
+const Timer = () => {
+  const [isWait, setIsWait] = useState(true);
+  const [isWork, setIsWork] = useState(false);
 
+  // 入力パラメータ
+  const [workTime, setWorkTime] = useState(20);
+  const [restTime, setRestTime] = useState(10);
+  const [loopLimit, setLoopLimit] = useState(0);
 
-  let timerId;
-  let tomotimerId;
- 
-   const count = () => {
-     timerId = setInterval(() => {
-      setTime((prevtime) => prevtime - 1)
-     }, 1000)
+  // 現在のセット数
+  const [loopCount, setLoopCount] = useState(0);
 
-     if(time === 0) {
-      clearInterval(timerId);
-      hocount();
-    }
+  // タイマー処理
+  const [timer, setTimer] = useState(0);
+
+  // アプリの本体
+  const useStateSwitcher = () =>{
+    isWait?(
+      useCount(timer,0)
+    ):(
+      isWork?(
+        useCount(timer,workTime),
+        loopCount==loopLimit
+      ):(
+        useCount(timer,restTime)
+      )
+    )
   }
 
-  const hocount = () => {
-    tomotimerId = setInterval(() => {
-      setIssetTime((tomo) => tomo - 1)
-    }, 1000)
-    
-    if(issetTime === 0) {
-      clearInterval(tomotimerId);
-      setIsSet((set) => set + 1 )
-     }
-   }
+  //  カウントする関数、スタートボタンを押したら呼び出します
+  const useCount = ( time, limit ) => {
+    useEffect(() => {
+      if ( time<limit && !isWait ){
+        const interval = setInterval(() => {
+          setTimer(time + .25)
+        }, 250);
+        return () => clearInterval(interval);
 
-  useEffect(() => {
-     count();
-    return () => {    
-      clearInterval(timerId);
-      clearInterval(tomotimerId);
-    }
-  },[time, issetTime])
-  
-   const handleStop = () => {
-    clearInterval(timerId);
- 
-   }
+      }else if( time==limit && !isWait ){
+        setTimer(0)
+        setLoopCount( isWork? loopCount: loopCount+1 )
+        setIsWork( !isWork )
+      }else{
+        setTimer(0)
+      }
+    },[time, limit])
+  }
 
   return (
-    <>
-    <div className='time'>残り{time}秒</div>
-    <div className='time'>残り{issetTime}秒</div>
-    <p className='set'> set : {isSet}</p>
-    <button className='start' onClick={() => count()}>start</button>
-    <button className='stop' onClick={() => handleStop()}>stop</button>
-    </>
+    <div>{timer}</div>
   )
 }
 
