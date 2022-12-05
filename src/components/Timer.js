@@ -1,8 +1,16 @@
 import React, { useState } from 'react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import "./Timer.css";
+import Sound from "./決定ボタンを押す30.mp3";
+import Stopsound from "./決定ボタンを押す47.mp3";
+import Completesound from "./201224_005.mp3";
+import useSound from 'use-sound';
+
   
 const Count = () => {
+  const [play] = useSound(Sound);
+  const [playStop] = useSound(Stopsound);
+  const [playComplete] = useSound(Completesound);
   const [isPlaying, setIsPlaying] = useState(true)
   const [count, setCount] = useState(20)
   const [restCount, setRestCount] = useState(10);
@@ -53,6 +61,7 @@ const Count = () => {
         onComplete={() => ({ shouldRepeat: true })}
       >
         {({ remainingTime }) => remainingTime}
+        
       </CountdownCircleTimer>
         </div>
      </div>
@@ -60,7 +69,7 @@ const Count = () => {
      <p className='set'> set : {isSet}</p>
       
        <div className='button'>
-      <button  className='start' onClick={() => setIsPlaying((prev) => !prev), play()}>
+      <button  className='start' onClick={() => (setIsPlaying((prev) => !prev), play())}>
         start or stop
       </button>
       <button  className='stop' onClick={() => setCount((prev) => (prev += 5))}>Count</button>
