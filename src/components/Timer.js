@@ -5,8 +5,8 @@ function Timer() {
   const [time, setTime] = useState(5);
   const [isSet, setIsSet] = useState(0);
   const [issetTime, setIssetTime ] = useState(10);
-  const [isWorkCount, setIsWorkCount] = useState(false);
-  const [isWorkHocount, setIsWorkHocount] = useState(false);
+  // const [isWorkCount, setIsWorkCount] = useState(false);
+  // const [isWorkHocount, setIsWorkHocount] = useState(false);
 
 
 
@@ -15,9 +15,9 @@ function Timer() {
  
    const count = () => {
      timerId = setInterval(() => {
-      setTime((prevtime) => prevtime - 1)
+      setTime(time - 1)
      }, 1000)
-     setIsWorkCount(!isWorkCount);
+    //  setIsWorkCount(!isWorkCount);
 
      if(time === 0) {
       clearInterval(timerId);
@@ -26,9 +26,9 @@ function Timer() {
 
   const hocount = () => {
     tomotimerId = setInterval(() => {
-      setIssetTime((tomo) => tomo - 1)
+      setIssetTime(issetTime - 1)
     }, 1000)
-    setIsWorkHocount(!isWorkHocount);
+    // setIsWorkHocount(!isWorkHocount);
     
     if(issetTime === 0) {
       clearInterval(tomotimerId);
@@ -56,16 +56,21 @@ function Timer() {
   
    const handleStop = () => {
     clearInterval(timerId);
- 
+    clearInterval(tomotimerId);
    }
 
   return (
     <>
-    <div className='time'>残り{time}秒</div>
-    <div className='subtime'>残り{issetTime}秒</div>
-    <p className='set'> set : {isSet}</p>
+    <h1 className='text'>さあ！みんなでHIITを頑張ろう！！</h1>
+    <div className='timecount'>
+      <div className='time'>残り{time}秒</div>
+      <div className='subtime'>残り{issetTime}秒</div>
+    </div>
+
+      <p className='set'> set : {isSet}</p>
+
     <div className='button'>
-      <button className='start' onClick={() => count()}>start</button>
+      <button className='start' onClick={() =>( count(), hocount())}>start</button>
       <button className='stop' onClick={() => handleStop()}>stop</button>
     </div>
     </>
