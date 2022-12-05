@@ -22,8 +22,8 @@ function Timer() {
      if(time === 0) {
       clearInterval(timerId);
     }
-  }
 
+  }
   const hocount = () => {
     tomotimerId = setInterval(() => {
       setIssetTime(issetTime - 1)
@@ -35,6 +35,7 @@ function Timer() {
       setIsSet((set) => set + 1 )
      }
    }
+  
 
    useEffect(() => {
       count();
