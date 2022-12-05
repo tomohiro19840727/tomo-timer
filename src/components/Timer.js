@@ -3,16 +3,18 @@ import "./Timer.css"
 import useSound from 'use-sound';
 import Sound from "./決定ボタンを押す30.mp3";
 import Stopsound from "./決定ボタンを押す47.mp3";
+import Completesound from "./201224_005.mp3";
 
 function Timer() {
   const [play] = useSound(Sound);
   const [playStop] = useSound(Stopsound);
+  const [playComplete] = useSound(Completesound);
 
   const [time, setTime] = useState(5);
   const [isSet, setIsSet] = useState(0);
   const [issetTime, setIssetTime ] = useState(10);
-  // const [isWorkCount, setIsWorkCount] = useState(false);
-  // const [isWorkHocount, setIsWorkHocount] = useState(false);
+  const [isWorkCount, setIsWorkCount] = useState(false);
+  const [isWorkHocount, setIsWorkHocount] = useState(false);
 
 
 
@@ -20,27 +22,32 @@ function Timer() {
   let tomotimerId;
  
    const count = () => {
+    if(!isWorkCount) {
      timerId = setInterval(() => {
       setTime(time - 1)
      }, 1000)
-    //  setIsWorkCount(!isWorkCount);
-
+     setIsWorkCount(isWorkCount);
+    }
     
-
      if(time === 0) {
       clearInterval(timerId);
     }
 
   }
   const hocount = () => {
+    if(!isWorkHocount && time === 0) {
     tomotimerId = setInterval(() => {
       setIssetTime(issetTime - 1)
     }, 1000)
-    // setIsWorkHocount(!isWorkHocount);
-    
+    setIsWorkHocount(isWorkHocount);
+  }else {
+    return;
+  }
+
     if(issetTime === 0) {
       clearInterval(tomotimerId);
       setIsSet((set) => set + 1 )
+      playComplete();
      }
    }
   
