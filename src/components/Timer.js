@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import "./Timer.css"
+import useSound from 'use-sound';
+import Sound from "./決定ボタンを押す30.mp3";
+import Stopsound from "./決定ボタンを押す47.mp3";
 
 function Timer() {
+  const [play] = useSound(Sound);
+  const [playStop] = useSound(Stopsound);
+
   const [time, setTime] = useState(5);
   const [isSet, setIsSet] = useState(0);
   const [issetTime, setIssetTime ] = useState(10);
@@ -18,6 +24,8 @@ function Timer() {
       setTime(time - 1)
      }, 1000)
     //  setIsWorkCount(!isWorkCount);
+
+    
 
      if(time === 0) {
       clearInterval(timerId);
@@ -71,8 +79,8 @@ function Timer() {
       <p className='set'> set : {isSet}</p>
 
     <div className='button'>
-      <button className='start' onClick={() =>( count(), hocount())}>start</button>
-      <button className='stop' onClick={() => handleStop()}>stop</button>
+      <button className='start' onClick={() =>( count(), hocount(), play())}>start</button>
+      <button className='stop' onClick={() => (handleStop(), playStop())}>stop</button>
     </div>
     </>
   )
