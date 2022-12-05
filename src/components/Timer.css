@@ -39,13 +39,19 @@
   justify-content: center;
   font-size: 36px;
   text-align: center;
-  color: white;/*文字色*/
+  /* color: white;文字色 */
   border: solid 3px #364e96;/*線色*/
-  padding: 30px;/*文字周りの余白*/
+  /* padding: 30px;文字周りの白 */
   border-radius: 0.5em;/*角丸*/
   width: 50%;
   margin: auto;
-  background-color: cornflowerblue;
+  /* background-color: cornflowerblue; */
+  position: relative;
+  padding: 0.3em 0.5em;
+  background: -webkit-linear-gradient(to top, rgb(137, 184, 255), #c5ceff);
+  background: linear-gradient(to top, rgb(137, 184, 255), #c5ceff);
+  color: #495193;
+  
 }
 
 
@@ -76,6 +82,16 @@
 }
 
 .set {
+  display: flex;
+  justify-content: center;
   font-size: 60px;
   text-align: center;
+  width: 20%;
+  margin: auto;
+  color: #010079;
+  text-shadow: 0 0 5px white;
+  border-left: solid 7px #010079;
+  background: -webkit-repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+  background: repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
 }
+
