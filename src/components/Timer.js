@@ -51,21 +51,7 @@ function Timer() {
      }
    },[issetTime, time])
 
-   useEffect(() => {
-      count();
-     return () => {    
-       clearInterval(timerId);
-     }
-   },[time, issetTime])
-   
-   useEffect(() => {
-    if(time === 0)
-      hocount();
-     return () => {    
-       clearInterval(tomotimerId);
-     }
-   },[issetTime, time])
-   ffds
+  
 
   
    const handleStop = () => {
@@ -76,10 +62,12 @@ function Timer() {
   return (
     <>
     <div className='time'>残り{time}秒</div>
-    <div className='time'>残り{issetTime}秒</div>
+    <div className='subtime'>残り{issetTime}秒</div>
     <p className='set'> set : {isSet}</p>
-    <button className='start' onClick={() => count()}>start</button>
-    <button className='stop' onClick={() => handleStop()}>stop</button>
+    <div className='button'>
+      <button className='start' onClick={() => count()}>start</button>
+      <button className='stop' onClick={() => handleStop()}>stop</button>
+    </div>
     </>
   )
 }
