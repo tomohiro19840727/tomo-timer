@@ -11,7 +11,7 @@
 
 .work {
   font-size: 120px;
-  margin: 120px;
+  margin: 80px;
   color: blue;
   background-color: floralwhite;
   border-radius: 100%;
@@ -21,7 +21,7 @@
 
 .rest {
   font-size: 120px;
-  margin: 120px;
+  margin: 80px;
   background-color:antiquewhite;
   color: deeppink;
   border-radius: 100%;

@@ -6,7 +6,7 @@ const Count = () => {
   const [isPlaying, setIsPlaying] = useState(true)
   const [count, setCount] = useState(20)
   const [restCount, setRestCount] = useState(10);
-  const [isset, setIsSet] = useState(0);
+  const [isSet, setIsSet] = useState(0);
 
   return (
     <div>
@@ -56,10 +56,11 @@ const Count = () => {
       </CountdownCircleTimer>
         </div>
      </div>
-
+ 
+     <p className='set'> set : {isSet}</p>
       
        <div className='button'>
-      <button  className='start' onClick={() => setIsPlaying((prev) => !prev)}>
+      <button  className='start' onClick={() => setIsPlaying((prev) => !prev), play()}>
         start or stop
       </button>
       <button  className='stop' onClick={() => setCount((prev) => (prev += 5))}>Count</button>
