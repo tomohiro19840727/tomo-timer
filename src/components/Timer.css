@@ -3,6 +3,31 @@
   justify-content: center;
 }
 
+.en {
+  display: flex;
+  justify-content: center;
+  /* background-color: coral; */
+}
+
+.work {
+  font-size: 120px;
+  margin: 120px;
+  color: blue;
+  background-color: floralwhite;
+  border-radius: 100%;
+  /* margin-bottom: auto; */
+  height: 240px;
+}
+
+.rest {
+  font-size: 120px;
+  margin: 120px;
+  background-color:antiquewhite;
+  color: deeppink;
+  border-radius: 100%;
+  /* margin-bottom: auto; */
+  height: 240px;
+}
 
 
 .time {
