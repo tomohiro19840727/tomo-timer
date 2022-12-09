@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import "./Timer.css";
 import Sound from "./決定ボタンを押す30.mp3";
@@ -6,15 +6,51 @@ import Stopsound from "./決定ボタンを押す47.mp3";
 import Completesound from "./201224_005.mp3";
 import useSound from 'use-sound';
 
+
   
 const Count = () => {
   const [play] = useSound(Sound);
   const [playStop] = useSound(Stopsound);
   const [playComplete] = useSound(Completesound);
   const [isPlaying, setIsPlaying] = useState(true)
-  const [count, setCount] = useState(20)
+  const [count, setCount] = useState(8)
   const [restCount, setRestCount] = useState(10);
   const [isSet, setIsSet] = useState(0);
+  const [isWork, setIsWork] = useState(true);
+
+
+   useEffect(() => {})
+  const renderTime = ({ remainingTime }) => {
+    if(remainingTime === 0) {
+      playComplete();
+    }
+  
+    return (
+      <div>
+        {remainingTime}
+      </div>
+    );
+  };
+
+  const renderRestTime = ({ remainingTime }) => {
+    // if(remainingTime > 0) {
+    //   setIsWork(isWork);
+    // } else 
+    if(remainingTime === 0 ) {
+      playStop();
+      // setIsSet(!isWork? isSet : isSet + 1)
+      // setIsWork(!isWork);
+      // setIsPlaying(!isPlaying);
+    }
+  
+    return (
+      <div>
+        {remainingTime}
+      </div>
+    );
+  };
+
+ 
 
   return (
     <div>
@@ -23,9 +59,9 @@ const Count = () => {
        <div className="work">
       <CountdownCircleTimer 
         size="240"
-        isPlaying={isPlaying}
+        isPlaying={!isPlaying}
         duration={count}
-        initialRemainingTime={20}
+        initialRemainingTime={8}
         isSmoothColorTransition={false}
         // updateInterval={1}
         colors="#aabbcc"
@@ -36,18 +72,18 @@ const Count = () => {
           // console.log('Counter is ', count)
           // console.log('Remaining time is ', remainingTime)
         }}
-        onComplete={() => ({ shouldRepeat: true })}
+        onComplete={() => ({ shouldRepeat: true, delay: 1 })}
       >
-        {({ remainingTime }) => remainingTime}
+        {renderTime}
       </CountdownCircleTimer>
        </div>
         
         <div className='rest'>
       <CountdownCircleTimer
         size="240"
-        isPlaying={isPlaying}
+        isPlaying={!isPlaying}
         duration={restCount}
-        initialRemainingTime={10}
+        initialRemainingTime={5}
         isSmoothColorTransition={false}
         // updateInterval={1}
         colors="#aabbcc"
@@ -58,9 +94,9 @@ const Count = () => {
           // console.log('Counter is ', count)
           // console.log('Remaining time is ', remainingTime)
         }}
-        onComplete={() => ({ shouldRepeat: true })}
+        onComplete={() => ({ shouldRepeat: true})}
       >
-        {({ remainingTime }) => remainingTime}
+        {renderRestTime}
         
       </CountdownCircleTimer>
         </div>
@@ -72,7 +108,6 @@ const Count = () => {
       <button  className='start' onClick={() => (setIsPlaying((prev) => !prev), play())}>
         start or stop
       </button>
-      <button  className='stop' onClick={() => setCount((prev) => (prev += 5))}>Count</button>
        </div>
     </div>
   )
