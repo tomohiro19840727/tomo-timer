@@ -5,7 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: aquamarine;
+  background-image: url("./images/miyakojima-12745_TP_V4.jpg");
+  background-size: 1500px;
+  background-position: center;
 }
 
 code {

@@ -13,15 +13,20 @@ const Count = () => {
   const [playStop] = useSound(Stopsound);
   const [playComplete] = useSound(Completesound);
   const [isPlaying, setIsPlaying] = useState(true)
-  const [count, setCount] = useState(8)
-  const [restCount, setRestCount] = useState(10);
+  const [count, setCount] = useState(30)
+  // const [restCount, setRestCount] = useState(10);
   const [isSet, setIsSet] = useState(0);
-  const [isWork, setIsWork] = useState(true);
+  // const [isWork, setIsWork] = useState(true);
 
 
-   useEffect(() => {})
+
+
+   
   const renderTime = ({ remainingTime }) => {
-    if(remainingTime === 0) {
+    if(remainingTime === 10) {
+      playStop() 
+      
+    } else if(remainingTime === 0) {
       playComplete();
     }
   
@@ -32,23 +37,42 @@ const Count = () => {
     );
   };
 
-  const renderRestTime = ({ remainingTime }) => {
-    // if(remainingTime > 0) {
-    //   setIsWork(isWork);
-    // } else 
-    if(remainingTime === 0 ) {
-      playStop();
-      // setIsSet(!isWork? isSet : isSet + 1)
-      // setIsWork(!isWork);
-      // setIsPlaying(!isPlaying);
+  let timerId;
+   
+  const setStart = () => {
+    
+         timerId = setInterval(() => {
+         setIsSet((prevSet) => prevSet + 1);
+        }, 30000)
+    
+         if(isSet === 2) 
+           clearInterval(timerId)
+         
     }
   
-    return (
-      <div>
-        {remainingTime}
-      </div>
-    );
-  };
+  // useEffect(() => {
+    
+  //   setStart()
+  //   return () => clearInterval(timerId)  
+  // }, [isSet])
+
+  // const renderRestTime = ({ remainingTime }) => {
+  //   // if(remainingTime > 0) {
+  //   //   setIsWork(isWork);
+  //   // } else 
+  //   if(remainingTime === 0 ) {
+  //     playStop();
+  //     // setIsSet(!isWork? isSet : isSet + 1)
+  //     // setIsWork(!isWork);
+  //     // setIsPlaying(!isPlaying);
+  //   }
+  
+  //   return (
+  //     <div>
+  //       {remainingTime}
+  //     </div>
+  //   );
+  // };
 
  
 
@@ -61,7 +85,7 @@ const Count = () => {
         size="240"
         isPlaying={!isPlaying}
         duration={count}
-        initialRemainingTime={8}
+        initialRemainingTime={30}
         isSmoothColorTransition={false}
         // updateInterval={1}
         colors="#aabbcc"
@@ -72,13 +96,13 @@ const Count = () => {
           // console.log('Counter is ', count)
           // console.log('Remaining time is ', remainingTime)
         }}
-        onComplete={() => ({ shouldRepeat: true, delay: 1 })}
+        onComplete={() => ({ shouldRepeat: true })}
       >
         {renderTime}
       </CountdownCircleTimer>
        </div>
         
-        <div className='rest'>
+        {/* <div className='rest'>
       <CountdownCircleTimer
         size="240"
         isPlaying={!isPlaying}
@@ -99,13 +123,13 @@ const Count = () => {
         {renderRestTime}
         
       </CountdownCircleTimer>
-        </div>
+        </div> */}
      </div>
  
      <p className='set'> set : {isSet}</p>
       
        <div className='button'>
-      <button  className='start' onClick={() => (setIsPlaying((prev) => !prev), play())}>
+      <button  className='start' onClick={() => (setIsPlaying((prev) => !prev), setStart() ,play())}>
         start or stop
       </button>
        </div>
